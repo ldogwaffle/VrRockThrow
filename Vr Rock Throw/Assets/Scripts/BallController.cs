@@ -5,9 +5,12 @@ using UnityEngine.UIElements;
 
 public class BallController : MonoBehaviour
 {
+    public GameObject ballReset;
+    public GameObject breakParticle;
     // Start is called before the first frame update
     void Start()
     {
+        transform.position = ballReset.transform.position;
         
     }
 
@@ -21,7 +24,10 @@ public class BallController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Target")
         {
-            this.gameObject.transform.position = new Vector3 (0, 0, 0);
+            Instantiate(breakParticle, transform.position, Quaternion.identity);
+            Instantiate(this.gameObject);
+            Destroy(this.gameObject);
+            
         }
     }
 }
